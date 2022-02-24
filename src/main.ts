@@ -35,7 +35,7 @@ async function run(): Promise<void> {
     });
     core.info(`pr : ${pullRequest}`)
 
-    if (pullRequest.draft) {
+    if (!pullRequest.draft) {
         await toDraft(pullRequest.node_id)
         core.info(
           `pr converted to draft: ${pullRequest.number} ${pullRequest.title}, last activity time ${pullRequest.updated_at}`
