@@ -24,19 +24,19 @@ async function toDraft(id: string): Promise<void> {
 
 async function run(): Promise<void> {
   try {
-    const daysBeforeConvert = parseInt(
-      core.getInput('days-before-convert-draft', {required: true})
+    const prKey = (
+      core.getInput('pr-key', {required: true})
     )
-    core.info('fetching all open pull requests')
+    core.info('fetching all open pull requests until I figure out how to get by ID')
     const pullRequests = await octokit.paginate(octokit.rest.pulls.list, {
       ...github.context.repo,
       state: 'open',
       per_page: 100
     })
-    core.info(`open pr count: ${pullRequests.length}`)
+    core.info(`pr key: ${pullRequests.length}`)
 
     for (const pr of pullRequests) {
-      if (!pr.draft && shouldConvertToDraft(pr.updated_at, daysBeforeConvert)) {
+      if (!pr.draft && pr.key != prKey)) {
         await toDraft(pr.node_id)
         core.info(
           `pr converted to draft: ${pr.number} ${pr.title}, last activity time ${pr.updated_at}`
