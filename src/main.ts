@@ -26,19 +26,19 @@ async function run(): Promise<void> {
     const prKey = (
       core.getInput('pr-key', {required: true})
     )
+    
     core.info('fetching all open pull requests until I figure out how to get by ID')
-    const pullRequests = await octokit.paginate(octokit.rest.pulls.list, {
+    const pullRequest = await ooctokit.rest.pulls.get({
+      ...github.context.owner,
       ...github.context.repo,
-      state: 'open',
-      per_page: 100
-    })
-    core.info(`pr key: ${pullRequests.length}`)
+      pull_number: prKey
+    });
+    core.info(`pr : ${pullRequest}`)
 
-    for (const pr of pullRequests) {
-      if (!pr.draft && pr.key != prKey)) {
-        await toDraft(pr.node_id)
+    if (pullRequest.draft) {
+        await toDraft(pullRequest.node_id)
         core.info(
-          `pr converted to draft: ${pr.number} ${pr.title}, last activity time ${pr.updated_at}`
+          `pr converted to draft: ${pullRequest.number} ${pullRequest.title}, last activity time ${pullRequest.updated_at}`
         )
       }
     }
