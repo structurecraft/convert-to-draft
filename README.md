@@ -6,6 +6,8 @@ Convert open pull requests to draft
 #### `repo-token`
 **Required** Follow https://docs.github.com/en/graphql/guides/forming-calls-with-graphql#authenticating-with-graphql to generate access token. At a minimum it should have pullrequest read/write access.
 
+#### `pr-key`
+**Required** The pull request to convert to draft
 
 ### Example
 ```yaml
