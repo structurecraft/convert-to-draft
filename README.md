@@ -1,5 +1,5 @@
-# Convert to Draft PRs
-Convert open pull requests to draft
+# Convert PR to Draft
+Convert a pull request to draft
 
 ### Input Options
 
@@ -24,5 +24,6 @@ jobs:
       - uses: raviraipuria/convert-to-draft@v1.0.1
         with:
           repo-token: ${{ secrets.TOKEN }}
+          pr-key: 645
 ```
 
