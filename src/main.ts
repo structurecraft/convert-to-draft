@@ -27,7 +27,7 @@ async function run(): Promise<void> {
       core.getInput('pr-key', {required: true})
     )
     
-    core.info('fetching all open pull requests until I figure out how to get by ID')
+    core.info('fetching the given Pull Request')
     const pullRequest = await ooctokit.rest.pulls.get({
       ...github.context.owner,
       ...github.context.repo,
