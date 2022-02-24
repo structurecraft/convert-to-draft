@@ -22,4 +22,3 @@ jobs:
       - uses: ./
         with:
           repo-token: ${{ secrets.TOKEN }}
-          days-before-convert-draft: 2
